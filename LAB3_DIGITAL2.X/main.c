@@ -30,9 +30,11 @@
 
 #include <xc.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <math.h>
 #include "LCD_8bits.h"
 #define _XTAL_FREQ 4000000
-
+char hola[12];
 
 void main(void) {
     TRISD = 0;
@@ -41,9 +43,17 @@ void main(void) {
     PORTC = 0;
     LCD_init();
     //LCD_clear();
+    //sprintf(hola, "hola %.2d", w );
+    //LCD_Write_String("Hola malnacidos, vamos a chupar");
+    LCD_Set_Cursor(1,3);
+    LCD_Write_String("Sho viejo");
+    LCD_Set_Cursor(2,5);
     while(1){
-        LCD_home();
-        LCD_Write_String("Vamonos perros");
+        LCD_Write_Character('W');
+        LCD_Cursor_rechts(1);
+        //LCD_Write_String("UA UA UA UA");
+        //LCD_Shift_links();
+        __delay_ms(500);
     }
     return;
 }

@@ -15,12 +15,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 "20 ./LCD_8bits.h
 [; ;./LCD_8bits.h: 20: void LCD_init(void);
 [v _LCD_init `(v ~T0 @X0 0 ef ]
-"19
-[; ;./LCD_8bits.h: 19: void LCD_home(void);
-[v _LCD_home `(v ~T0 @X0 0 ef ]
+"23
+[; ;./LCD_8bits.h: 23: void LCD_Set_Cursor(uint8_t linea, uint8_t columna);
+[v _LCD_Set_Cursor `(v ~T0 @X0 0 ef2`uc`uc ]
 "22
 [; ;./LCD_8bits.h: 22: void LCD_Write_String(char *a);
 [v _LCD_Write_String `(v ~T0 @X0 0 ef1`*uc ]
+"21
+[; ;./LCD_8bits.h: 21: void LCD_Write_Character(char caracter);
+[v _LCD_Write_Character `(v ~T0 @X0 0 ef1`uc ]
+"26
+[; ;./LCD_8bits.h: 26: void LCD_Cursor_rechts(uint8_t espacios);
+[v _LCD_Cursor_rechts `(v ~T0 @X0 0 ef1`uc ]
+[v F1256 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic.h
+[v __delay `JF1256 ~T0 @X0 0 e ]
+[p i __delay ]
 "13 main.c
 [p x FOSC = INTRC_NOCLKOUT ]
 "14
@@ -279,49 +289,64 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-[v $root$_main `(v ~T0 @X0 0 e ]
 "37 main.c
-[; ;main.c: 37: void main(void) {
+[; ;main.c: 37: char hola[12];
+[v _hola `uc ~T0 @X0 -> 12 `i e ]
+[v $root$_main `(v ~T0 @X0 0 e ]
+"39
+[; ;main.c: 39: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"38
-[; ;main.c: 38:     TRISD = 0;
-[e = _TRISD -> -> 0 `i `uc ]
-"39
-[; ;main.c: 39:     TRISC = 0;
-[e = _TRISC -> -> 0 `i `uc ]
 "40
-[; ;main.c: 40:     PORTD = 0;
-[e = _PORTD -> -> 0 `i `uc ]
+[; ;main.c: 40:     TRISD = 0;
+[e = _TRISD -> -> 0 `i `uc ]
 "41
-[; ;main.c: 41:     PORTC = 0;
-[e = _PORTC -> -> 0 `i `uc ]
+[; ;main.c: 41:     TRISC = 0;
+[e = _TRISC -> -> 0 `i `uc ]
 "42
-[; ;main.c: 42:     LCD_init();
-[e ( _LCD_init ..  ]
+[; ;main.c: 42:     PORTD = 0;
+[e = _PORTD -> -> 0 `i `uc ]
+"43
+[; ;main.c: 43:     PORTC = 0;
+[e = _PORTC -> -> 0 `i `uc ]
 "44
-[; ;main.c: 44:     while(1){
-[e :U 140 ]
-{
-"45
-[; ;main.c: 45:         LCD_home();
-[e ( _LCD_home ..  ]
-"46
-[; ;main.c: 46:         LCD_Write_String("Vamonos perros");
-[e ( _LCD_Write_String (1 :s 1C ]
-"47
-[; ;main.c: 47:     }
-}
-[e :U 139 ]
-[e $U 140  ]
-[e :U 141 ]
+[; ;main.c: 44:     LCD_init();
+[e ( _LCD_init ..  ]
 "48
-[; ;main.c: 48:     return;
-[e $UE 138  ]
+[; ;main.c: 48:     LCD_Set_Cursor(1,3);
+[e ( _LCD_Set_Cursor (2 , -> -> 1 `i `uc -> -> 3 `i `uc ]
 "49
-[; ;main.c: 49: }
-[e :UE 138 ]
+[; ;main.c: 49:     LCD_Write_String("Sho viejo");
+[e ( _LCD_Write_String (1 :s 1C ]
+"50
+[; ;main.c: 50:     LCD_Set_Cursor(2,5);
+[e ( _LCD_Set_Cursor (2 , -> -> 2 `i `uc -> -> 5 `i `uc ]
+"51
+[; ;main.c: 51:     while(1){
+[e :U 141 ]
+{
+"52
+[; ;main.c: 52:         LCD_Write_Character('W');
+[e ( _LCD_Write_Character (1 -> -> 87 `ui `uc ]
+"53
+[; ;main.c: 53:         LCD_Cursor_rechts(1);
+[e ( _LCD_Cursor_rechts (1 -> -> 1 `i `uc ]
+"56
+[; ;main.c: 56:         _delay((unsigned long)((500)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"57
+[; ;main.c: 57:     }
 }
-[a 1C 86 97 109 111 110 111 115 32 112 101 114 114 111 115 0 ]
+[e :U 140 ]
+[e $U 141  ]
+[e :U 142 ]
+"58
+[; ;main.c: 58:     return;
+[e $UE 139  ]
+"59
+[; ;main.c: 59: }
+[e :UE 139 ]
+}
+[a 1C 83 104 111 32 118 105 101 106 111 0 ]

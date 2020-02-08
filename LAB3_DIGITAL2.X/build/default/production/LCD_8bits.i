@@ -2645,6 +2645,11 @@ void LCD_home(void);
 void LCD_init(void);
 void LCD_Write_Character(char caracter);
 void LCD_Write_String(char *a);
+void LCD_Set_Cursor(uint8_t linea, uint8_t columna);
+void LCD_Shift_links();
+void LCD_Shift_rechts();
+void LCD_Cursor_rechts(uint8_t espacios);
+void LCD_Cursor_links(uint8_t espacios);
 # 11 "LCD_8bits.c" 2
 # 29 "LCD_8bits.c"
 void LCD_Port(uint8_t bits){
@@ -2708,5 +2713,41 @@ void LCD_Write_String(char *a){
     int n;
     for(n = 0; a[n] != '\0'; n++){
         LCD_Write_Character(a[n]);
+    }
+}
+
+void LCD_Set_Cursor(uint8_t linea, uint8_t columna){
+    uint8_t corrimiento = 0;
+    switch (linea){
+        case 1:
+            corrimiento = 0x80 + columna;
+            LCD_Cmd(corrimiento);
+            break;
+        case 2:
+            corrimiento = 0x80 + 0x40 + columna;
+            LCD_Cmd(corrimiento);
+            break;
+        default:
+            LCD_Cmd(0x80);
+    }
+}
+
+void LCD_Shift_links(){
+    LCD_Cmd(0x18);
+}
+
+void LCD_Shift_rechts(){
+    LCD_Cmd(0x1C);
+}
+
+void LCD_Cursor_rechts(uint8_t espacios){
+    for (uint8_t n = 0; n <= espacios; n++){
+        LCD_Cmd(0x14);
+    }
+}
+
+void LCD_Cursor_links(uint8_t espacios){
+    for (uint8_t n = 0; n <= espacios; n++){
+        LCD_Cmd(0x10);
     }
 }
