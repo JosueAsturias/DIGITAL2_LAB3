@@ -3,8 +3,16 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 6 ]
+"16 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\ADC.c
+[v _ADConfig ADConfig `(v  1 e 1 0 ]
+"97
+[v _AnalogRead_8 AnalogRead_8 `(uc  1 e 1 0 ]
+"121
+[v _ADC_CHselect ADC_CHselect `(v  1 e 1 0 ]
 "10 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c90\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c90\common\Umul8_16.c
 [v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
 "6 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c90\pic\__eeprom.c
@@ -21,13 +29,17 @@
 [v _LCD_Write_String LCD_Write_String `(v  1 e 1 0 ]
 "93
 [v _LCD_Set_Cursor LCD_Set_Cursor `(v  1 e 1 0 ]
-"117
-[v _LCD_Cursor_rechts LCD_Cursor_rechts `(v  1 e 1 0 ]
-"39 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
+"129
+[v _uint_to_char uint_to_char `(uc  1 e 1 0 ]
+"44 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
+[v _ISR_ADC ISR_ADC `II(v  1 e 1 0 ]
+"51
 [v _main main `(v  1 e 1 0 ]
+"99
+[v _mapear mapear `(*.4ui  1 e 1 0 ]
 "290 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
 [v _PORTC PORTC `VEuc  1 e 1 @7 ]
-[s S65 . 1 `uc 1 RC0 1 0 :1:0 
+[s S202 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -37,18 +49,171 @@
 `uc 1 RC7 1 0 :1:7 
 ]
 "307
-[u S74 . 1 `S65 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES74  1 e 1 @7 ]
+[u S211 . 1 `S202 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES211  1 e 1 @7 ]
 "352
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
+[s S383 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"482
+[s S392 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 TMR0IE 1 0 :1:5 
+]
+[u S397 . 1 `S383 1 . 1 0 `S392 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES397  1 e 1 @11 ]
+[s S22 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"553
+[u S30 . 1 `S22 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES30  1 e 1 @12 ]
+"1238
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+[s S113 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+`uc 1 ADCS 1 0 :2:6 
+]
+"1276
+[s S118 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 ADCS0 1 0 :1:6 
+`uc 1 ADCS1 1 0 :1:7 
+]
+[s S127 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S130 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[u S133 . 1 `S113 1 . 1 0 `S118 1 . 1 0 `S127 1 . 1 0 `S130 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES133  1 e 1 @31 ]
+[s S306 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1433
+[u S315 . 1 `S306 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES315  1 e 1 @133 ]
 "1540
 [v _TRISC TRISC `VEuc  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
-"39 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
+[s S348 . 1 `uc 1 TRISE0 1 0 :1:0 
+`uc 1 TRISE1 1 0 :1:1 
+`uc 1 TRISE2 1 0 :1:2 
+`uc 1 TRISE3 1 0 :1:3 
+]
+"1677
+[u S353 . 1 `S348 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES353  1 e 1 @137 ]
+[s S41 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+]
+"1718
+[u S49 . 1 `S41 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES49  1 e 1 @140 ]
+"2970
+[v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
+[s S291 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 VCFG0 1 0 :1:4 
+`uc 1 VCFG1 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 ADFM 1 0 :1:7 
+]
+"2991
+[u S297 . 1 `S291 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES297  1 e 1 @159 ]
+[s S327 . 1 `uc 1 ANS0 1 0 :1:0 
+`uc 1 ANS1 1 0 :1:1 
+`uc 1 ANS2 1 0 :1:2 
+`uc 1 ANS3 1 0 :1:3 
+`uc 1 ANS4 1 0 :1:4 
+`uc 1 ANS5 1 0 :1:5 
+`uc 1 ANS6 1 0 :1:6 
+`uc 1 ANS7 1 0 :1:7 
+]
+"3404
+[u S336 . 1 `S327 1 . 1 0 ]
+[v _ANSELbits ANSELbits `VES336  1 e 1 @392 ]
+"37 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
+[v _valorADC_CH5 valorADC_CH5 `uc  1 e 1 0 ]
+"38
+[v _banderaADC banderaADC `uc  1 e 1 0 ]
+"39
+[v _valorADC_CH0 valorADC_CH0 `uc  1 e 1 0 ]
+"40
+[v _num1 num1 `*.4ui  1 e 1 0 ]
+"41
+[v _num2 num2 `*.4ui  1 e 1 0 ]
+"51
 [v _main main `(v  1 e 1 0 ]
 {
-"59
+"96
+} 0
+"129 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\LCD_8bits.c
+[v _uint_to_char uint_to_char `(uc  1 e 1 0 ]
+{
+[v uint_to_char@numero numero `uc  1 a 1 wreg ]
+"130
+[v uint_to_char@numChr numChr `uc  1 a 1 5 ]
+"129
+[v uint_to_char@numero numero `uc  1 a 1 wreg ]
+[v uint_to_char@numero numero `uc  1 a 1 4 ]
+"166
+} 0
+"99 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
+[v _mapear mapear `(*.4ui  1 e 1 0 ]
+{
+[v mapear@valor valor `uc  1 a 1 wreg ]
+"100
+[v mapear@resultado resultado `[3]ui  1 a 6 7 ]
+"101
+[v mapear@dividendo dividendo `ui  1 a 2 13 ]
+"99
+[v mapear@valor valor `uc  1 a 1 wreg ]
+[v mapear@limReal limReal `uc  1 p 1 0 ]
+[v mapear@limSup limSup `uc  1 p 1 1 ]
+[v mapear@valor valor `uc  1 a 1 6 ]
+"118
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 6 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 2 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 4 ]
+"53
 } 0
 "57 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\LCD_8bits.c
 [v _LCD_init LCD_init `(v  1 e 1 0 ]
@@ -60,11 +225,11 @@
 {
 [v LCD_Write_String@a a `*.24uc  1 a 1 wreg ]
 "87
-[v LCD_Write_String@n n `i  1 a 2 2 ]
+[v LCD_Write_String@n n `i  1 a 2 4 ]
 "86
 [v LCD_Write_String@a a `*.24uc  1 a 1 wreg ]
 "88
-[v LCD_Write_String@a a `*.24uc  1 a 1 4 ]
+[v LCD_Write_String@a a `*.24uc  1 a 1 6 ]
 "91
 } 0
 "77
@@ -72,7 +237,7 @@
 {
 [v LCD_Write_Character@caracter caracter `uc  1 a 1 wreg ]
 [v LCD_Write_Character@caracter caracter `uc  1 a 1 wreg ]
-[v LCD_Write_Character@caracter caracter `uc  1 a 1 1 ]
+[v LCD_Write_Character@caracter caracter `uc  1 a 1 3 ]
 "84
 } 0
 "93
@@ -80,29 +245,52 @@
 {
 [v LCD_Set_Cursor@linea linea `uc  1 a 1 wreg ]
 "94
-[v LCD_Set_Cursor@corrimiento corrimiento `uc  1 a 1 7 ]
+[v LCD_Set_Cursor@corrimiento corrimiento `uc  1 a 1 1 ]
 "93
 [v LCD_Set_Cursor@linea linea `uc  1 a 1 wreg ]
-[v LCD_Set_Cursor@columna columna `uc  1 p 1 3 ]
-[v LCD_Set_Cursor@linea linea `uc  1 a 1 6 ]
+[v LCD_Set_Cursor@columna columna `uc  1 p 1 5 ]
+[v LCD_Set_Cursor@linea linea `uc  1 a 1 0 ]
 "107
-} 0
-"117
-[v _LCD_Cursor_rechts LCD_Cursor_rechts `(v  1 e 1 0 ]
-{
-[v LCD_Cursor_rechts@espacios espacios `uc  1 a 1 wreg ]
-"118
-[v LCD_Cursor_rechts@n n `uc  1 a 1 5 ]
-"117
-[v LCD_Cursor_rechts@espacios espacios `uc  1 a 1 wreg ]
-[v LCD_Cursor_rechts@espacios espacios `uc  1 a 1 4 ]
-"121
 } 0
 "33
 [v _LCD_Cmd LCD_Cmd `(v  1 e 1 0 ]
 {
 [v LCD_Cmd@comando comando `uc  1 a 1 wreg ]
 [v LCD_Cmd@comando comando `uc  1 a 1 wreg ]
-[v LCD_Cmd@comando comando `uc  1 a 1 2 ]
+[v LCD_Cmd@comando comando `uc  1 a 1 4 ]
 "43
+} 0
+"97 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\ADC.c
+[v _AnalogRead_8 AnalogRead_8 `(uc  1 e 1 0 ]
+{
+[v AnalogRead_8@just just `uc  1 a 1 wreg ]
+"98
+[v AnalogRead_8@conversion conversion `uc  1 a 1 5 ]
+"97
+[v AnalogRead_8@just just `uc  1 a 1 wreg ]
+[v AnalogRead_8@just just `uc  1 a 1 4 ]
+"110
+} 0
+"16
+[v _ADConfig ADConfig `(v  1 e 1 0 ]
+{
+[v ADConfig@oscFreq oscFreq `uc  1 a 1 wreg ]
+[v ADConfig@oscFreq oscFreq `uc  1 a 1 wreg ]
+[v ADConfig@canal canal `uc  1 p 1 2 ]
+[v ADConfig@justificado justificado `uc  1 p 1 3 ]
+[v ADConfig@oscFreq oscFreq `uc  1 a 1 6 ]
+"95
+} 0
+"121
+[v _ADC_CHselect ADC_CHselect `(v  1 e 1 0 ]
+{
+[v ADC_CHselect@canal canal `uc  1 a 1 wreg ]
+[v ADC_CHselect@canal canal `uc  1 a 1 wreg ]
+[v ADC_CHselect@canal canal `uc  1 a 1 4 ]
+"167
+} 0
+"44 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
+[v _ISR_ADC ISR_ADC `II(v  1 e 1 0 ]
+{
+"49
 } 0

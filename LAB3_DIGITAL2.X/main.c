@@ -30,11 +30,23 @@
 
 #include <xc.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <math.h>
 #include "LCD_8bits.h"
+#include "ADC.h"
 #define _XTAL_FREQ 4000000
-char hola[12];
+char linea2[12];
+uint8_t valorADC_CH5 = 0;
+uint8_t banderaADC = 1;
+uint8_t valorADC_CH0 = 0;
+uint16_t *num1;
+uint16_t *num2;
+uint16_t * mapear(uint8_t valor, uint8_t limReal, uint8_t limSup);
+
+void __interrupt() ISR_ADC(void){
+    if (PIR1bits.ADIF && PIE1bits.ADIE){
+        PIE1bits.ADIE = 0;
+        banderaADC = 1;
+    }
+}
 
 void main(void) {
     TRISD = 0;
@@ -42,18 +54,65 @@ void main(void) {
     PORTD = 0;
     PORTC = 0;
     LCD_init();
-    //LCD_clear();
-    //sprintf(hola, "hola %.2d", w );
-    //LCD_Write_String("Hola malnacidos, vamos a chupar");
-    LCD_Set_Cursor(1,3);
-    LCD_Write_String("Sho viejo");
-    LCD_Set_Cursor(2,5);
+    ADConfig(8, 5, 'H');
+    LCD_Set_Cursor(1,1);
+    LCD_Write_String("S1    S2    S3");
     while(1){
-        LCD_Write_Character('W');
-        LCD_Cursor_rechts(1);
-        //LCD_Write_String("UA UA UA UA");
-        //LCD_Shift_links();
-        __delay_ms(500);
+        if (banderaADC == 1){
+            switch (ADCON0bits.CHS){
+                case 5:
+                    valorADC_CH5 = AnalogRead_8('H');
+                    ADC_CHselect(0);
+                    num1 = mapear(valorADC_CH5, 255, 5);
+                    LCD_Set_Cursor(2, 0);
+                    LCD_Write_Character(uint_to_char(num1[0]));
+                    LCD_Write_Character('.');
+                    LCD_Write_Character(uint_to_char(num1[1]));
+                    LCD_Write_Character(uint_to_char(num1[2]));
+                    LCD_Write_Character('V');
+                    break;
+                case 0:
+                    valorADC_CH0 = AnalogRead_8('H');
+                    ADC_CHselect(5);
+                    num2 = mapear(valorADC_CH0, 255, 5);
+                    LCD_Set_Cursor(2, 6);
+                    LCD_Write_Character(uint_to_char(num2[0]));
+                    LCD_Write_Character('.');
+                    LCD_Write_Character(uint_to_char(num2[1]));
+                    LCD_Write_Character(uint_to_char(num2[2]));
+                    LCD_Write_Character('V');
+                    break;
+                default:
+                    valorADC_CH0 = 0;
+                    valorADC_CH5 = 0; 
+            }
+            banderaADC = 0;
+            PIR1bits.ADIF = 0;
+            PIE1bits.ADIE = 1;
+            ADCON0bits.GO_nDONE = 1;
+        }
     }
     return;
+}
+
+
+uint16_t * mapear(uint8_t valor, uint8_t limReal, uint8_t limSup){
+    uint16_t resultado[3] = {0,0,0};  // u.d1.d2  [u, d1, d2]
+    uint16_t dividendo = valor*limSup;
+    while (limReal <= dividendo){
+        resultado[0] = resultado[0] + 1;
+        dividendo = dividendo - limReal;
+    }
+    dividendo = dividendo *10;
+    while (limReal <= dividendo){
+        resultado[1] = resultado[1] +1;
+        dividendo = dividendo - limReal;
+    }
+    dividendo = dividendo *10;
+    while (limReal <= dividendo){
+        resultado[2] = resultado[2] +1;
+        dividendo = dividendo - limReal;
+    }
+    
+    return resultado;
 }

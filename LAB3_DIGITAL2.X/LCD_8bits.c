@@ -125,3 +125,42 @@ void LCD_Cursor_links(uint8_t espacios){
         LCD_Cmd(0x10);
     }
 }
+
+char uint_to_char(uint8_t numero){
+    char numChr = 214;
+    switch (numero){
+        case 0:
+            numChr = 48;
+            break;
+        case 1:
+            numChr = 49;
+            break;
+        case 2:
+            numChr = 50;
+            break;
+        case 3:
+            numChr = 51;
+            break;
+        case 4:
+            numChr = 52;
+            break;
+        case 5:
+            numChr = 53;
+            break;
+        case 6:
+            numChr = 54;
+            break;
+        case 7:
+            numChr = 55;
+            break;
+        case 8:
+            numChr = 56;
+            break;
+        case 9:
+            numChr = 57;
+            break;
+        default:
+            numChr = 214;
+    }
+    return(numChr);
+}

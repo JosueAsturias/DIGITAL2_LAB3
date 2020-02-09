@@ -1,4 +1,4 @@
-# 1 "LCD_8bits.c"
+# 1 "ADC.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "LCD_8bits.c" 2
+# 1 "ADC.c" 2
 
 
 
@@ -2499,7 +2499,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 9 "LCD_8bits.c" 2
+# 9 "ADC.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 3
@@ -2634,160 +2634,176 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 10 "LCD_8bits.c" 2
+# 10 "ADC.c" 2
 
-# 1 "./LCD_8bits.h" 1
-# 16 "./LCD_8bits.h"
-void LCD_Port(uint8_t bits);
-void LCD_Cmd(uint8_t comando);
-void LCD_clear(void);
-void LCD_home(void);
-void LCD_init(void);
-void LCD_Write_Character(char caracter);
-void LCD_Write_String(char *a);
-void LCD_Set_Cursor(uint8_t linea, uint8_t columna);
-void LCD_Shift_links();
-void LCD_Shift_rechts();
-void LCD_Cursor_rechts(uint8_t espacios);
-void LCD_Cursor_links(uint8_t espacios);
-char uint_to_char(uint8_t numero);
-# 11 "LCD_8bits.c" 2
-# 29 "LCD_8bits.c"
-void LCD_Port(uint8_t bits){
-    PORTD = bits;
-}
+# 1 "./ADC.h" 1
+# 14 "./ADC.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
+# 14 "./ADC.h" 2
 
-void LCD_Cmd(uint8_t comando){
-    PORTCbits.RC0 = 0;
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-    PORTCbits.RC1 = 1;
-    _delay((unsigned long)((5)*(4000000/4000.0)));
 
-    PORTD = comando;
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-    PORTCbits.RC1 = 0;
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-}
+void ADConfig(uint8_t oscFreq,uint8_t canal, unsigned char justificado);
 
-void LCD_clear(void){
-    LCD_Cmd(0x00);
-    LCD_Cmd(0x01);
-    _delay((unsigned long)((4)*(4000000/4000.0)));
-}
+uint8_t AnalogRead_8(unsigned char just);
 
-void LCD_home(void){
-    LCD_Cmd(0x00);
-    LCD_Cmd(0x02);
-    _delay((unsigned long)((4)*(4000000/4000.0)));
-}
+void ADCinit();
 
-void LCD_init(void){
-    _delay((unsigned long)((20)*(4000000/4000.0)));
-    LCD_Cmd(0x30);
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-    LCD_Cmd(0x30);
-    _delay((unsigned long)((100)*(4000000/4000000.0)));
-    LCD_Cmd(0x30);
-    _delay((unsigned long)((100)*(4000000/4000000.0)));
-    LCD_Cmd(0x38);
-    _delay((unsigned long)((53)*(4000000/4000000.0)));
-    LCD_Cmd(0x08);
-    _delay((unsigned long)((53)*(4000000/4000000.0)));
-    LCD_Cmd(0x01);
-    _delay((unsigned long)((3)*(4000000/4000.0)));
-    LCD_Cmd(0x06);
-    _delay((unsigned long)((53)*(4000000/4000000.0)));
-    LCD_Cmd(0x0C);
-    _delay((unsigned long)((53)*(4000000/4000000.0)));
-}
+void ADC_CHselect(uint8_t canal);
+# 11 "ADC.c" 2
 
-void LCD_Write_Character(char caracter){
-    PORTCbits.RC0 = 1;
 
-    PORTD = caracter;
-    PORTCbits.RC1 = 1;
-    _delay((unsigned long)((40)*(4000000/4000000.0)));
-    PORTCbits.RC1 = 0;
-}
 
-void LCD_Write_String(char *a){
-    int n;
-    for(n = 0; a[n] != '\0'; n++){
-        LCD_Write_Character(a[n]);
-    }
-}
 
-void LCD_Set_Cursor(uint8_t linea, uint8_t columna){
-    uint8_t corrimiento = 0;
-    switch (linea){
+
+void ADConfig(uint8_t oscFreq,uint8_t canal, unsigned char justificado){
+    switch(oscFreq){
         case 1:
-            corrimiento = 0x80 + columna;
-            LCD_Cmd(corrimiento);
-            break;
-        case 2:
-            corrimiento = 0x80 + 0x40 + columna;
-            LCD_Cmd(corrimiento);
-            break;
-        default:
-            LCD_Cmd(0x80);
-    }
-}
-
-void LCD_Shift_links(){
-    LCD_Cmd(0x18);
-}
-
-void LCD_Shift_rechts(){
-    LCD_Cmd(0x1C);
-}
-
-void LCD_Cursor_rechts(uint8_t espacios){
-    for (uint8_t n = 0; n <= espacios; n++){
-        LCD_Cmd(0x14);
-    }
-}
-
-void LCD_Cursor_links(uint8_t espacios){
-    for (uint8_t n = 0; n <= espacios; n++){
-        LCD_Cmd(0x10);
-    }
-}
-
-char uint_to_char(uint8_t numero){
-    char numChr = 214;
-    switch (numero){
-        case 0:
-            numChr = 48;
-            break;
-        case 1:
-            numChr = 49;
-            break;
-        case 2:
-            numChr = 50;
-            break;
-        case 3:
-            numChr = 51;
+            ADCON0bits.ADCS = 0b00;
             break;
         case 4:
-            numChr = 52;
-            break;
-        case 5:
-            numChr = 53;
-            break;
-        case 6:
-            numChr = 54;
-            break;
-        case 7:
-            numChr = 55;
+            ADCON0bits.ADCS = 0b01;
             break;
         case 8:
-            numChr = 56;
+            ADCON0bits.ADCS = 0b10;
             break;
-        case 9:
-            numChr = 57;
+        case 20:
+            ADCON0bits.ADCS = 0b11;
             break;
         default:
-            numChr = 214;
+            ADCON0bits.ADCS = 0b01;
     }
-    return(numChr);
+    switch(justificado){
+        case 'H':
+            ADCON1bits.ADFM = 0;
+            break;
+        case 'L':
+            ADCON1bits.ADFM = 1;
+            break;
+        default:
+            ADCON1bits.ADFM = 0;
+    }
+    switch (canal){
+        case 0:
+            TRISAbits.TRISA0 = 1;
+            ANSELbits.ANS0 = 1;
+            ADCON0bits.CHS = 0;
+            break;
+        case 1:
+            TRISAbits.TRISA1 = 1;
+            ANSELbits.ANS1 = 1;
+            ADCON0bits.CHS = 1;
+            break;
+        case 2:
+            TRISAbits.TRISA2 = 1;
+            ANSELbits.ANS2 = 1;
+            ADCON0bits.CHS = 2;
+            break;
+        case 3:
+            TRISAbits.TRISA3 = 1;
+            ANSELbits.ANS3 = 1;
+            ADCON0bits.CHS = 3;
+            break;
+        case 4:
+            TRISAbits.TRISA5 = 1;
+            ANSELbits.ANS4 = 1;
+            ADCON0bits.CHS = 3;
+            break;
+        case 5:
+            TRISEbits.TRISE0 = 1;
+            ANSELbits.ANS5 = 1;
+            ADCON0bits.CHS = 5;
+            break;
+        case 6:
+            TRISEbits.TRISE1 = 1;
+            ANSELbits.ANS6 = 1;
+            ADCON0bits.CHS = 6;
+            break;
+        case 7:
+            TRISEbits.TRISE2 = 1;
+            ANSELbits.ANS7 = 1;
+            ADCON0bits.CHS = 7;
+            break;
+
+
+
+    }
+    ADCON0bits.ADON = 1;
+    PIR1bits.ADIF = 0;
+    PIE1bits.ADIE = 1;
+    INTCONbits.PEIE = 1;
+    INTCONbits.GIE = 1;
+    _delay((unsigned long)((30)*(4000000/4000.0)));
+    ADCON0bits.GO_nDONE = 1;
+}
+
+uint8_t AnalogRead_8(unsigned char just){
+    uint8_t conversion = 0;
+    switch (just){
+        case 'H':
+            conversion = ADRESH;
+            break;
+        case 'L':
+            conversion = ADRESL;
+            break;
+        default:
+            conversion = ADRESH;
+    }
+    return (conversion);
+}
+
+void ADCinit(){
+    PIR1bits.ADIF = 0;
+    PIE1bits.ADIE = 1;
+    INTCONbits.GIE = 1;
+    _delay((unsigned long)((20)*(4000000/4000.0)));
+    ADCON0bits.GO_nDONE = 1;
+    return;
+}
+
+void ADC_CHselect(uint8_t canal){
+    switch (canal){
+        case 0:
+            TRISAbits.TRISA0 = 1;
+            ANSELbits.ANS0 = 1;
+            ADCON0bits.CHS = 0;
+            break;
+        case 1:
+            TRISAbits.TRISA1 = 1;
+            ANSELbits.ANS1 = 1;
+            ADCON0bits.CHS = 1;
+            break;
+        case 2:
+            TRISAbits.TRISA2 = 1;
+            ANSELbits.ANS2 = 1;
+            ADCON0bits.CHS = 2;
+            break;
+        case 3:
+            TRISAbits.TRISA3 = 1;
+            ANSELbits.ANS3 = 1;
+            ADCON0bits.CHS = 3;
+            break;
+        case 4:
+            TRISAbits.TRISA5 = 1;
+            ANSELbits.ANS4 = 1;
+            ADCON0bits.CHS = 3;
+            break;
+        case 5:
+            TRISEbits.TRISE0 = 1;
+            ANSELbits.ANS5 = 1;
+            ADCON0bits.CHS = 5;
+            break;
+        case 6:
+            TRISEbits.TRISE1 = 1;
+            ANSELbits.ANS6 = 1;
+            ADCON0bits.CHS = 6;
+            break;
+        case 7:
+            TRISEbits.TRISE2 = 1;
+            ANSELbits.ANS7 = 1;
+            ADCON0bits.CHS = 7;
+            break;
+
+
+
+    }
 }

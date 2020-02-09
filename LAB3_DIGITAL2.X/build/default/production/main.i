@@ -2648,140 +2648,6 @@ typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
 # 32 "main.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdio.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\__size_t.h" 1 3
-
-
-
-typedef unsigned size_t;
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdio.h" 2 3
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\__null.h" 1 3
-# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdarg.h" 1 3
-
-
-
-
-
-
-typedef void * va_list[1];
-
-#pragma intrinsic(__va_start)
-extern void * __va_start(void);
-
-#pragma intrinsic(__va_arg)
-extern void * __va_arg(void *, ...);
-# 11 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdio.h" 2 3
-# 43 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdio.h" 3
-struct __prbuf
-{
- char * ptr;
- void (* func)(char);
-};
-# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdio.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\conio.h" 1 3
-
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\errno.h" 1 3
-# 29 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\errno.h" 3
-extern int errno;
-# 8 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\conio.h" 2 3
-
-
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-
-
-extern char * cgets(char *);
-extern void cputs(const char *);
-# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-extern int cprintf(char *, ...);
-#pragma printf_check(cprintf)
-
-
-
-extern int _doprnt(struct __prbuf *, const register char *, register va_list);
-# 180 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdio.h" 3
-#pragma printf_check(vprintf) const
-#pragma printf_check(vsprintf) const
-
-extern char * gets(char *);
-extern int puts(const char *);
-extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
-extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
-extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
-extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
-extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
-extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
-
-#pragma printf_check(printf) const
-#pragma printf_check(sprintf) const
-extern int sprintf(char *, const char *, ...);
-extern int printf(const char *, ...);
-# 33 "main.c" 2
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\math.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\__unsupported.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\math.h" 2 3
-# 30 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\math.h" 3
-extern double fabs(double);
-extern double floor(double);
-extern double ceil(double);
-extern double modf(double, double *);
-extern double sqrt(double);
-extern double atof(const char *);
-extern double sin(double) ;
-extern double cos(double) ;
-extern double tan(double) ;
-extern double asin(double) ;
-extern double acos(double) ;
-extern double atan(double);
-extern double atan2(double, double) ;
-extern double log(double);
-extern double log10(double);
-extern double pow(double, double) ;
-extern double exp(double) ;
-extern double sinh(double) ;
-extern double cosh(double) ;
-extern double tanh(double);
-extern double eval_poly(double, const double *, int);
-extern double frexp(double, int *);
-extern double ldexp(double, int);
-extern double fmod(double, double);
-extern double trunc(double);
-extern double round(double);
-# 34 "main.c" 2
-
 # 1 "./LCD_8bits.h" 1
 # 16 "./LCD_8bits.h"
 void LCD_Port(uint8_t bits);
@@ -2796,10 +2662,39 @@ void LCD_Shift_links();
 void LCD_Shift_rechts();
 void LCD_Cursor_rechts(uint8_t espacios);
 void LCD_Cursor_links(uint8_t espacios);
-# 35 "main.c" 2
+char uint_to_char(uint8_t numero);
+# 33 "main.c" 2
+
+# 1 "./ADC.h" 1
+# 14 "./ADC.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
+# 14 "./ADC.h" 2
 
 
-char hola[12];
+void ADConfig(uint8_t oscFreq,uint8_t canal, unsigned char justificado);
+
+uint8_t AnalogRead_8(unsigned char just);
+
+void ADCinit();
+
+void ADC_CHselect(uint8_t canal);
+# 34 "main.c" 2
+
+
+char linea2[12];
+uint8_t valorADC_CH5 = 0;
+uint8_t banderaADC = 1;
+uint8_t valorADC_CH0 = 0;
+uint16_t *num1;
+uint16_t *num2;
+uint16_t * mapear(uint8_t valor, uint8_t limReal, uint8_t limSup);
+
+void __attribute__((picinterrupt(("")))) ISR_ADC(void){
+    if (PIR1bits.ADIF && PIE1bits.ADIE){
+        PIE1bits.ADIE = 0;
+        banderaADC = 1;
+    }
+}
 
 void main(void) {
     TRISD = 0;
@@ -2807,18 +2702,65 @@ void main(void) {
     PORTD = 0;
     PORTC = 0;
     LCD_init();
-
-
-
-    LCD_Set_Cursor(1,3);
-    LCD_Write_String("Sho viejo");
-    LCD_Set_Cursor(2,5);
+    ADConfig(8, 5, 'H');
+    LCD_Set_Cursor(1,1);
+    LCD_Write_String("S1    S2    S3");
     while(1){
-        LCD_Write_Character('W');
-        LCD_Cursor_rechts(1);
-
-
-        _delay((unsigned long)((500)*(4000000/4000.0)));
+        if (banderaADC == 1){
+            switch (ADCON0bits.CHS){
+                case 5:
+                    valorADC_CH5 = AnalogRead_8('H');
+                    ADC_CHselect(0);
+                    num1 = mapear(valorADC_CH5, 255, 5);
+                    LCD_Set_Cursor(2, 0);
+                    LCD_Write_Character(uint_to_char(num1[0]));
+                    LCD_Write_Character('.');
+                    LCD_Write_Character(uint_to_char(num1[1]));
+                    LCD_Write_Character(uint_to_char(num1[2]));
+                    LCD_Write_Character('V');
+                    break;
+                case 0:
+                    valorADC_CH0 = AnalogRead_8('H');
+                    ADC_CHselect(5);
+                    num2 = mapear(valorADC_CH0, 255, 5);
+                    LCD_Set_Cursor(2, 6);
+                    LCD_Write_Character(uint_to_char(num2[0]));
+                    LCD_Write_Character('.');
+                    LCD_Write_Character(uint_to_char(num2[1]));
+                    LCD_Write_Character(uint_to_char(num2[2]));
+                    LCD_Write_Character('V');
+                    break;
+                default:
+                    valorADC_CH0 = 0;
+                    valorADC_CH5 = 0;
+            }
+            banderaADC = 0;
+            PIR1bits.ADIF = 0;
+            PIE1bits.ADIE = 1;
+            ADCON0bits.GO_nDONE = 1;
+        }
     }
     return;
+}
+
+
+uint16_t * mapear(uint8_t valor, uint8_t limReal, uint8_t limSup){
+    uint16_t resultado[3] = {0,0,0};
+    uint16_t dividendo = valor*limSup;
+    while (limReal <= dividendo){
+        resultado[0] = resultado[0] + 1;
+        dividendo = dividendo - limReal;
+    }
+    dividendo = dividendo *10;
+    while (limReal <= dividendo){
+        resultado[1] = resultado[1] +1;
+        dividendo = dividendo - limReal;
+    }
+    dividendo = dividendo *10;
+    while (limReal <= dividendo){
+        resultado[2] = resultado[2] +1;
+        dividendo = dividendo - limReal;
+    }
+
+    return resultado;
 }
