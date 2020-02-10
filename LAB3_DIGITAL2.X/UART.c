@@ -32,3 +32,17 @@ char uartRC_Read(){
     __delay_ms(5);
     uint8_t lectura = RCREG;
 }
+
+void uartTX_Write(char dato){
+        TXREG = dato;
+        while(TXSTAbits.TRMT == 0){
+            __delay_us(500);
+    }
+}
+
+void uartTX_Write_Str(char * string){
+    int n;
+    for (n=0; string[n] != '\n'; n++){
+        uartTX_Write(string[n]);
+    }
+}

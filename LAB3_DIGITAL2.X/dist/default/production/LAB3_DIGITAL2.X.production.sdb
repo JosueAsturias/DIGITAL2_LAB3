@@ -41,15 +41,17 @@
 [v _ISR_ADC ISR_ADC `II(v  1 e 1 0 ]
 "58
 [v _main main `(v  1 e 1 0 ]
-"132
+"142
 [v _mapear mapear `(*.4ui  1 e 1 0 ]
 "13 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\UART.c
 [v _uartRC_init uartRC_init `(uc  1 e 1 0 ]
 "31
 [v _uartRC_Read uartRC_Read `(uc  1 e 1 0 ]
+"36
+[v _uartTX_Write uartTX_Write `(v  1 e 1 0 ]
 "290 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
 [v _PORTC PORTC `VEuc  1 e 1 @7 ]
-[s S225 . 1 `uc 1 RC0 1 0 :1:0 
+[s S230 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -59,11 +61,11 @@
 `uc 1 RC7 1 0 :1:7 
 ]
 "307
-[u S234 . 1 `S225 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES234  1 e 1 @7 ]
+[u S239 . 1 `S230 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES239  1 e 1 @7 ]
 "352
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
-[s S407 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S412 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -73,13 +75,13 @@
 `uc 1 GIE 1 0 :1:7 
 ]
 "482
-[s S416 . 1 `uc 1 . 1 0 :2:0 
+[s S421 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 TMR0IE 1 0 :1:5 
 ]
-[u S421 . 1 `S407 1 . 1 0 `S416 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES421  1 e 1 @11 ]
+[u S426 . 1 `S412 1 . 1 0 `S421 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES426  1 e 1 @11 ]
 [s S22 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
@@ -91,7 +93,7 @@
 "553
 [u S30 . 1 `S22 1 . 1 0 ]
 [v _PIR1bits PIR1bits `VES30  1 e 1 @12 ]
-[s S524 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S529 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -101,18 +103,20 @@
 `uc 1 SPEN 1 0 :1:7 
 ]
 "1068
-[s S533 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S538 . 1 `uc 1 RCD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S537 . 1 `uc 1 . 1 0 :6:0 
+[s S542 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 nRC8 1 0 :1:6 
 ]
-[s S540 . 1 `uc 1 . 1 0 :6:0 
+[s S545 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[u S543 . 1 `S524 1 . 1 0 `S533 1 . 1 0 `S537 1 . 1 0 `S540 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES543  1 e 1 @24 ]
+[u S548 . 1 `S529 1 . 1 0 `S538 1 . 1 0 `S542 1 . 1 0 `S545 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES548  1 e 1 @24 ]
+"1133
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
 "1140
 [v _RCREG RCREG `VEuc  1 e 1 @26 ]
 "1238
@@ -140,7 +144,7 @@
 ]
 [u S148 . 1 `S128 1 . 1 0 `S133 1 . 1 0 `S142 1 . 1 0 `S145 1 . 1 0 ]
 [v _ADCON0bits ADCON0bits `VES148  1 e 1 @31 ]
-[s S330 . 1 `uc 1 TRISA0 1 0 :1:0 
+[s S335 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -150,20 +154,20 @@
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "1433
-[u S339 . 1 `S330 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES339  1 e 1 @133 ]
+[u S344 . 1 `S335 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES344  1 e 1 @133 ]
 "1540
 [v _TRISC TRISC `VEuc  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
-[s S372 . 1 `uc 1 TRISE0 1 0 :1:0 
+[s S377 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 TRISE3 1 0 :1:3 
 ]
 "1677
-[u S377 . 1 `S372 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES377  1 e 1 @137 ]
+[u S382 . 1 `S377 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES382  1 e 1 @137 ]
 [s S41 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
@@ -175,7 +179,7 @@
 "1718
 [u S49 . 1 `S41 1 . 1 0 ]
 [v _PIE1bits PIE1bits `VES49  1 e 1 @140 ]
-[s S486 . 1 `uc 1 TX9D 1 0 :1:0 
+[s S491 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -185,29 +189,29 @@
 `uc 1 CSRC 1 0 :1:7 
 ]
 "2582
-[s S495 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S500 . 1 `uc 1 TXD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 nTX8 1 0 :1:6 
 ]
-[s S499 . 1 `uc 1 . 1 0 :6:0 
+[s S504 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[u S502 . 1 `S486 1 . 1 0 `S495 1 . 1 0 `S499 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES502  1 e 1 @152 ]
+[u S507 . 1 `S491 1 . 1 0 `S500 1 . 1 0 `S504 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES507  1 e 1 @152 ]
 "2642
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "2970
 [v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
-[s S315 . 1 `uc 1 . 1 0 :4:0 
+[s S320 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "2991
-[u S321 . 1 `S315 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES321  1 e 1 @159 ]
-[s S351 . 1 `uc 1 ANS0 1 0 :1:0 
+[u S326 . 1 `S320 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES326  1 e 1 @159 ]
+[s S356 . 1 `uc 1 ANS0 1 0 :1:0 
 `uc 1 ANS1 1 0 :1:1 
 `uc 1 ANS2 1 0 :1:2 
 `uc 1 ANS3 1 0 :1:3 
@@ -217,8 +221,8 @@
 `uc 1 ANS7 1 0 :1:7 
 ]
 "3404
-[u S360 . 1 `S351 1 . 1 0 ]
-[v _ANSELbits ANSELbits `VES360  1 e 1 @392 ]
+[u S365 . 1 `S356 1 . 1 0 ]
+[v _ANSELbits ANSELbits `VES365  1 e 1 @392 ]
 "38 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
 [v _valorADC_CH5 valorADC_CH5 `uc  1 e 1 0 ]
 "39
@@ -238,7 +242,7 @@
 "58
 [v _main main `(v  1 e 1 0 ]
 {
-"129
+"139
 } 0
 "116 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\LCD_8bits.c
 [v _uint_to_char uint_to_char `(uc  1 e 1 0 ]
@@ -279,7 +283,15 @@
 [v ___awdiv@dividend dividend `i  1 p 2 2 ]
 "41
 } 0
-"13 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\UART.c
+"36 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\UART.c
+[v _uartTX_Write uartTX_Write `(v  1 e 1 0 ]
+{
+[v uartTX_Write@dato dato `uc  1 a 1 wreg ]
+[v uartTX_Write@dato dato `uc  1 a 1 wreg ]
+[v uartTX_Write@dato dato `uc  1 a 1 3 ]
+"41
+} 0
+"13
 [v _uartRC_init uartRC_init `(uc  1 e 1 0 ]
 {
 "14
@@ -306,20 +318,20 @@
 {
 "34
 } 0
-"132 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
+"142 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB3\DIGITAL2_LAB3\LAB3_DIGITAL2.X\main.c
 [v _mapear mapear `(*.4ui  1 e 1 0 ]
 {
 [v mapear@valor valor `uc  1 a 1 wreg ]
-"133
+"143
 [v mapear@resultado resultado `[3]ui  1 a 6 5 ]
-"134
+"144
 [v mapear@dividendo dividendo `ui  1 a 2 11 ]
-"132
+"142
 [v mapear@valor valor `uc  1 a 1 wreg ]
 [v mapear@limReal limReal `uc  1 p 1 8 ]
 [v mapear@limSup limSup `uc  1 p 1 9 ]
 [v mapear@valor valor `uc  1 a 1 4 ]
-"151
+"161
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]

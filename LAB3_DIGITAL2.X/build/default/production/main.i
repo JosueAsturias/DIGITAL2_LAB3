@@ -2687,6 +2687,8 @@ void ADC_CHselect(uint8_t canal);
 
 uint8_t uartRC_init(uint16_t baudrate);
 char uartRC_Read();
+void uartTX_Write(char dato);
+void uartTX_Write_Str(char * string);
 # 35 "main.c" 2
 
 
@@ -2738,6 +2740,7 @@ void main(void) {
                     LCD_Write_Character(uint_to_char(num1[1]));
                     LCD_Write_Character(uint_to_char(num1[2]));
                     LCD_Write_Character('V');
+
                     break;
                 case 0:
                     valorADC_CH0 = AnalogRead_8('H');
@@ -2749,6 +2752,7 @@ void main(void) {
                     LCD_Write_Character(uint_to_char(num2[1]));
                     LCD_Write_Character(uint_to_char(num2[2]));
                     LCD_Write_Character('V');
+
                     break;
                 default:
                     valorADC_CH0 = 0;
@@ -2777,6 +2781,14 @@ void main(void) {
             LCD_Write_Character(uint_to_char(num3[0]));
             LCD_Write_Character(uint_to_char(num3[1]));
             LCD_Write_Character(uint_to_char(num3[2]));
+
+
+
+
+
+
+            uartTX_Write(valorADC_CH5);
+            uartTX_Write(valorADC_CH0);
 
 
 

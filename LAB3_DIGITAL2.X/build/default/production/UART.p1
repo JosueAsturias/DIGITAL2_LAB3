@@ -51,6 +51,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1140 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1140: extern volatile unsigned char RCREG __attribute__((address(0x01A)));
 [v _RCREG `Vuc ~T0 @X0 0 e@26 ]
+"1133
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1133: extern volatile unsigned char TXREG __attribute__((address(0x019)));
+[v _TXREG `Vuc ~T0 @X0 0 e@25 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -359,4 +362,66 @@ Version 4.0 HI-TECH Software Intermediate Code
 "34
 [; ;UART.c: 34: }
 [e :UE 141 ]
+}
+"36
+[; ;UART.c: 36: void uartTX_Write(char dato){
+[v _uartTX_Write `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _uartTX_Write ]
+[v _dato `uc ~T0 @X0 1 r1 ]
+[f ]
+"37
+[; ;UART.c: 37:         TXREG = dato;
+[e = _TXREG -> _dato `uc ]
+"38
+[; ;UART.c: 38:         while(TXSTAbits.TRMT == 0){
+[e $U 143  ]
+[e :U 144 ]
+{
+"39
+[; ;UART.c: 39:             _delay((unsigned long)((500)*(4000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"40
+[; ;UART.c: 40:     }
+}
+[e :U 143 ]
+"38
+[; ;UART.c: 38:         while(TXSTAbits.TRMT == 0){
+[e $ == -> . . _TXSTAbits 0 1 `i -> 0 `i 144  ]
+[e :U 145 ]
+"41
+[; ;UART.c: 41: }
+[e :UE 142 ]
+}
+"43
+[; ;UART.c: 43: void uartTX_Write_Str(char * string){
+[v _uartTX_Write_Str `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _uartTX_Write_Str ]
+[v _string `*uc ~T0 @X0 1 r1 ]
+[f ]
+"44
+[; ;UART.c: 44:     int n;
+[v _n `i ~T0 @X0 1 a ]
+"45
+[; ;UART.c: 45:     for (n=0; string[n] != '\n'; n++){
+{
+[e = _n -> 0 `i ]
+[e $U 150  ]
+[e :U 147 ]
+{
+"46
+[; ;UART.c: 46:         uartTX_Write(string[n]);
+[e ( _uartTX_Write (1 *U + _string * -> _n `x -> -> # *U _string `i `x ]
+"47
+[; ;UART.c: 47:     }
+}
+[e ++ _n -> 1 `i ]
+[e :U 150 ]
+[e $ != -> *U + _string * -> _n `x -> -> # *U _string `i `x `ui -> 10 `ui 147  ]
+[e :U 148 ]
+}
+"48
+[; ;UART.c: 48: }
+[e :UE 146 ]
 }

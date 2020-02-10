@@ -2640,6 +2640,8 @@ typedef uint16_t uintptr_t;
 
 uint8_t uartRC_init(uint16_t baudrate);
 char uartRC_Read();
+void uartTX_Write(char dato);
+void uartTX_Write_Str(char * string);
 # 10 "UART.c" 2
 
 
@@ -2665,4 +2667,18 @@ uint8_t uartRC_init(uint16_t baudrate){
 char uartRC_Read(){
     _delay((unsigned long)((5)*(4000000/4000.0)));
     uint8_t lectura = RCREG;
+}
+
+void uartTX_Write(char dato){
+        TXREG = dato;
+        while(TXSTAbits.TRMT == 0){
+            _delay((unsigned long)((500)*(4000000/4000000.0)));
+    }
+}
+
+void uartTX_Write_Str(char * string){
+    int n;
+    for (n=0; string[n] != '\n'; n++){
+        uartTX_Write(string[n]);
+    }
 }

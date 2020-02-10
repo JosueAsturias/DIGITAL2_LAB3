@@ -14,6 +14,8 @@
 #include <stdint.h>
 uint8_t uartRC_init(uint16_t baudrate);
 char uartRC_Read();
+void uartTX_Write(char dato);
+void uartTX_Write_Str(char * string);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

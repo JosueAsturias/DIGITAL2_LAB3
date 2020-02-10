@@ -82,6 +82,7 @@ void main(void) {
                     LCD_Write_Character(uint_to_char(num1[1]));
                     LCD_Write_Character(uint_to_char(num1[2]));
                     LCD_Write_Character('V');
+                    //uartTX_Write(valorADC_CH5);
                     break;
                 case 0:
                     valorADC_CH0 = AnalogRead_8('H');
@@ -93,6 +94,7 @@ void main(void) {
                     LCD_Write_Character(uint_to_char(num2[1]));
                     LCD_Write_Character(uint_to_char(num2[2]));
                     LCD_Write_Character('V');
+                    //uartTX_Write(valorADC_CH0);
                     break;
                 default:
                     valorADC_CH0 = 0;
@@ -121,9 +123,17 @@ void main(void) {
             LCD_Write_Character(uint_to_char(num3[0]));
             LCD_Write_Character(uint_to_char(num3[1]));
             LCD_Write_Character(uint_to_char(num3[2]));
-//            LCD_Set_Cursor(1,11);
-//            LCD_Write_Character(valorSerial);
-        
+            //LCD_Set_Cursor(1,11);
+            //LCD_Write_Character(valorSerial);
+            
+//            uint16_t str[3] = {valorADC_CH5, valorADC_CH0, '\n'};
+//            uartTX_Write_Str(str);
+            
+            uartTX_Write(valorADC_CH5);
+            uartTX_Write(valorADC_CH0);
+            
+            
+
     }
     return;
 }
