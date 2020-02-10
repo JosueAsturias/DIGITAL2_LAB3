@@ -32,6 +32,7 @@
 #include <stdint.h>
 #include "LCD_8bits.h"
 #include "ADC.h"
+#include "UART.h"
 #define _XTAL_FREQ 4000000
 char linea2[12];
 uint8_t valorADC_CH5 = 0;
@@ -39,7 +40,13 @@ uint8_t banderaADC = 1;
 uint8_t valorADC_CH0 = 0;
 uint16_t *num1;
 uint16_t *num2;
+uint16_t *num3;
+uint8_t banderaSerial = 0;
+uint8_t contador = 0;
+char valorSerial = 'E';
+
 uint16_t * mapear(uint8_t valor, uint8_t limReal, uint8_t limSup);
+
 
 void __interrupt() ISR_ADC(void){
     if (PIR1bits.ADIF && PIE1bits.ADIE){
@@ -54,10 +61,15 @@ void main(void) {
     PORTD = 0;
     PORTC = 0;
     LCD_init();
-    ADConfig(8, 5, 'H');
+    ADConfig(4, 5, 'H');
     LCD_Set_Cursor(1,1);
     LCD_Write_String("S1    S2    S3");
+    uartRC_init(300);
     while(1){
+        if(PIR1bits.RCIF == 1){
+            valorSerial = uartRC_Read();
+            __delay_ms(5);
+        }
         if (banderaADC == 1){
             switch (ADCON0bits.CHS){
                 case 5:
@@ -91,6 +103,27 @@ void main(void) {
             PIE1bits.ADIE = 1;
             ADCON0bits.GO_nDONE = 1;
         }
+            switch (valorSerial){
+                case 43:
+                    contador ++;
+                    valorSerial = 0;
+                    break;
+                case 45:
+                    contador --;
+                    valorSerial = 0;
+                    break;
+                default:
+                    contador = contador;
+            }
+            
+            num3 = uint_to_array(contador);
+            LCD_Set_Cursor(2,13);
+            LCD_Write_Character(uint_to_char(num3[0]));
+            LCD_Write_Character(uint_to_char(num3[1]));
+            LCD_Write_Character(uint_to_char(num3[2]));
+//            LCD_Set_Cursor(1,11);
+//            LCD_Write_Character(valorSerial);
+        
     }
     return;
 }

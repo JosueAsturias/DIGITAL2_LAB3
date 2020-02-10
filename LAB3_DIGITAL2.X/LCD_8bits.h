@@ -13,7 +13,6 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 
 
-void LCD_Port(uint8_t bits);
 void LCD_Cmd(uint8_t comando);
 void LCD_clear(void);
 void LCD_home(void);
@@ -26,5 +25,6 @@ void LCD_Shift_rechts();
 void LCD_Cursor_rechts(uint8_t espacios);
 void LCD_Cursor_links(uint8_t espacios);
 char uint_to_char(uint8_t numero);
+uint16_t * uint_to_array(uint8_t numero);
 #endif	
 

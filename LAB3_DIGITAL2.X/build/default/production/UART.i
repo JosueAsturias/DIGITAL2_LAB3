@@ -1,4 +1,4 @@
-# 1 "LCD_8bits.c"
+# 1 "UART.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "LCD_8bits.c" 2
+# 1 "UART.c" 2
 
 
 
@@ -2499,8 +2499,10 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 9 "LCD_8bits.c" 2
+# 9 "UART.c" 2
 
+# 1 "./UART.h" 1
+# 14 "./UART.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 3
 typedef signed char int8_t;
@@ -2634,165 +2636,33 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 10 "LCD_8bits.c" 2
+# 14 "./UART.h" 2
 
-# 1 "./LCD_8bits.h" 1
-# 16 "./LCD_8bits.h"
-void LCD_Cmd(uint8_t comando);
-void LCD_clear(void);
-void LCD_home(void);
-void LCD_init(void);
-void LCD_Write_Character(char caracter);
-void LCD_Write_String(char *a);
-void LCD_Set_Cursor(uint8_t linea, uint8_t columna);
-void LCD_Shift_links();
-void LCD_Shift_rechts();
-void LCD_Cursor_rechts(uint8_t espacios);
-void LCD_Cursor_links(uint8_t espacios);
-char uint_to_char(uint8_t numero);
-uint16_t * uint_to_array(uint8_t numero);
-# 11 "LCD_8bits.c" 2
-# 21 "LCD_8bits.c"
-void LCD_Cmd(uint8_t comando){
-    PORTCbits.RC0 = 0;
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-    PORTCbits.RC1 = 1;
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-    PORTD = comando;
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-    PORTCbits.RC1 = 0;
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-}
+uint8_t uartRC_init(uint16_t baudrate);
+char uartRC_Read();
+# 10 "UART.c" 2
 
-void LCD_clear(void){
-    LCD_Cmd(0x00);
-    LCD_Cmd(0x01);
-    _delay((unsigned long)((4)*(4000000/4000.0)));
-}
 
-void LCD_home(void){
-    LCD_Cmd(0x00);
-    LCD_Cmd(0x02);
-    _delay((unsigned long)((4)*(4000000/4000.0)));
-}
 
-void LCD_init(void){
-    _delay((unsigned long)((20)*(4000000/4000.0)));
-    LCD_Cmd(0x30);
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-    LCD_Cmd(0x30);
-    _delay((unsigned long)((100)*(4000000/4000000.0)));
-    LCD_Cmd(0x30);
-    _delay((unsigned long)((100)*(4000000/4000000.0)));
-    LCD_Cmd(0x38);
-    _delay((unsigned long)((53)*(4000000/4000000.0)));
-    LCD_Cmd(0x08);
-    _delay((unsigned long)((53)*(4000000/4000000.0)));
-    LCD_Cmd(0x01);
-    _delay((unsigned long)((3)*(4000000/4000.0)));
-    LCD_Cmd(0x06);
-    _delay((unsigned long)((53)*(4000000/4000000.0)));
-    LCD_Cmd(0x0C);
-    _delay((unsigned long)((53)*(4000000/4000000.0)));
-}
-
-void LCD_Write_Character(char caracter){
-    PORTCbits.RC0 = 1;
-
-    PORTD = caracter;
-    PORTCbits.RC1 = 1;
-    _delay((unsigned long)((40)*(4000000/4000000.0)));
-    PORTCbits.RC1 = 0;
-}
-
-void LCD_Write_String(char *a){
-    int n;
-    for(n = 0; a[n] != '\0'; n++){
-        LCD_Write_Character(a[n]);
+uint8_t uartRC_init(uint16_t baudrate){
+    uint16_t n;
+    n = (4000000 - baudrate*64)/(baudrate*64);
+    if (n > 255){
+        n = (4000000 - baudrate*16)/(baudrate*16);
+        TXSTAbits.BRGH = 1;
     }
-}
-
-void LCD_Set_Cursor(uint8_t linea, uint8_t columna){
-    uint8_t corrimiento = 0;
-    switch (linea){
-        case 1:
-            corrimiento = 0x80 + columna;
-            LCD_Cmd(corrimiento);
-            break;
-        case 2:
-            corrimiento = 0x80 + 0x40 + columna;
-            LCD_Cmd(corrimiento);
-            break;
-        default:
-            LCD_Cmd(0x80);
+    if (n < 256){
+        SPBRG = n;
+        TXSTAbits.SYNC = 0;
+        RCSTAbits.SPEN = 1;
+        RCSTAbits.CREN = 1;
+        TXSTAbits.TXEN = 1;
     }
+    return 0;
 }
 
-void LCD_Shift_links(){
-    LCD_Cmd(0x18);
-}
 
-void LCD_Shift_rechts(){
-    LCD_Cmd(0x1C);
-}
-
-void LCD_Cursor_rechts(uint8_t espacios){
-    for (uint8_t n = 0; n <= espacios; n++){
-        LCD_Cmd(0x14);
-    }
-}
-
-void LCD_Cursor_links(uint8_t espacios){
-    for (uint8_t n = 0; n <= espacios; n++){
-        LCD_Cmd(0x10);
-    }
-}
-
-char uint_to_char(uint8_t numero){
-    char numChr = 214;
-    switch (numero){
-        case 0:
-            numChr = 48;
-            break;
-        case 1:
-            numChr = 49;
-            break;
-        case 2:
-            numChr = 50;
-            break;
-        case 3:
-            numChr = 51;
-            break;
-        case 4:
-            numChr = 52;
-            break;
-        case 5:
-            numChr = 53;
-            break;
-        case 6:
-            numChr = 54;
-            break;
-        case 7:
-            numChr = 55;
-            break;
-        case 8:
-            numChr = 56;
-            break;
-        case 9:
-            numChr = 57;
-            break;
-        default:
-            numChr = 214;
-    }
-    return(numChr);
-}
-
-uint16_t * uint_to_array(uint8_t numero){
-    uint16_t resultado[3] = {0,0,0};
-    resultado[0] = numero/100;
-    uint8_t centenas = resultado[0];
-    resultado[1] = (numero - (centenas *100))/10;
-    uint8_t decenas = resultado[1];
-    resultado[2] = numero -(centenas*100+decenas*10);
-    return(resultado);
+char uartRC_Read(){
+    _delay((unsigned long)((5)*(4000000/4000.0)));
+    uint8_t lectura = RCREG;
 }

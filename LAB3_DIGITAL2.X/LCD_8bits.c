@@ -11,14 +11,6 @@
 #include "LCD_8bits.h"
 
 #define _XTAL_FREQ 4000000   // cambiar de acuerdo a la configuracion del OSC
-#define D0 PORTDbits.RD0
-#define D1 PORTDbits.RD1
-#define D2 PORTDbits.RD2
-#define D3 PORTDbits.RD3
-#define D4 PORTDbits.RD4
-#define D5 PORTDbits.RD5
-#define D6 PORTDbits.RD6
-#define D7 PORTDbits.RD7
 
 #define RS PORTCbits.RC0
 #define EN PORTCbits.RC1
@@ -26,16 +18,11 @@
 #define DATA_PORT PORTD 
 
 
-void LCD_Port(uint8_t bits){
-    PORTD = bits;
-}
-
 void LCD_Cmd(uint8_t comando){
     RS = 0;
     __delay_ms(5);
     EN = 1;
     __delay_ms(5);
-    //LCD_Port(comando);
     DATA_PORT = comando;
     __delay_ms(5);
     EN = 0;
@@ -163,4 +150,14 @@ char uint_to_char(uint8_t numero){
             numChr = 214;
     }
     return(numChr);
+}
+
+uint16_t * uint_to_array(uint8_t numero){
+    uint16_t resultado[3] = {0,0,0};
+    resultado[0] = numero/100;
+    uint8_t centenas = resultado[0];
+    resultado[1] = (numero - (centenas *100))/10;
+    uint8_t decenas = resultado[1];
+    resultado[2] = numero -(centenas*100+decenas*10);
+    return(resultado);
 }
